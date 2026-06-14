@@ -6,566 +6,551 @@
 <title>Yogesh Gulve — Senior .NET Engineer</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --navy:       #0A0F1E;
-    --navy-mid:   #111827;
-    --navy-card:  #141C2E;
-    --navy-border:#1E2D4A;
-    --slate:      #1A2744;
-    --cyan:       #00D4FF;
-    --cyan-dim:   #00A8CC;
-    --cyan-glow:  rgba(0,212,255,0.12);
-    --white:      #F0F4FF;
-    --silver:     #8A9BB8;
-    --silver-dim: #5A6A85;
-    --gold:       #FFB830;
+:root {
+  --navy:        #0A0F1E;
+  --navy-mid:    #111827;
+  --navy-card:   #141C2E;
+  --navy-border: #1E2D4A;
+  --slate:       #1A2744;
+  --cyan:        #00D4FF;
+  --cyan-dim:    #00A8CC;
+  --cyan-glow:   rgba(0,212,255,0.12);
+  --white:       #F0F4FF;
+  --silver:      #8A9BB8;
+  --silver-dim:  #5A6A85;
+  --gold:        #FFB830;
+  --green:       #4ADE80;
 
-    --font-display: 'Syne', sans-serif;
-    --font-body:    'Inter', sans-serif;
-    --font-mono:    'JetBrains Mono', monospace;
-  }
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'Inter', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
 
-  html { scroll-behavior: smooth; }
+  --max-w: 1140px;
+  --px: clamp(1.25rem, 5vw, 5rem);
+  --section-py: clamp(3.5rem, 8vw, 7rem);
+}
 
-  body {
-    background: var(--navy);
-    color: var(--white);
-    font-family: var(--font-body);
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--navy);
+  color: var(--white);
+  font-family: var(--font-body);
+  line-height: 1.65;
+  overflow-x: hidden;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+}
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--navy); }
+::-webkit-scrollbar-thumb { background: var(--cyan-dim); border-radius: 2px; }
 
-  /* ── SCROLLBAR ── */
-  ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { background: var(--navy); }
-  ::-webkit-scrollbar-thumb { background: var(--cyan-dim); border-radius: 2px; }
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem var(--px);
+  background: rgba(10,15,30,0.9);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--navy-border);
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-weight: 800; font-size: 1.1rem;
+  color: var(--white); text-decoration: none; letter-spacing: -0.5px;
+}
+.nav-logo span { color: var(--cyan); }
+.nav-links { display: flex; gap: 1.75rem; list-style: none; }
+.nav-links a {
+  font-size: 0.78rem; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--silver); text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--cyan); }
+.nav-cta {
+  font-size: 0.76rem; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--navy); background: var(--cyan);
+  padding: 0.45rem 1.1rem; border-radius: 3px;
+  text-decoration: none; transition: opacity 0.2s; white-space: nowrap;
+}
+.nav-cta:hover { opacity: 0.85; }
 
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1rem 4rem;
-    background: rgba(10,15,30,0.85);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--navy-border);
-    transition: padding 0.3s;
-  }
-  .nav-logo {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 1.15rem;
-    color: var(--white);
-    text-decoration: none;
-    letter-spacing: -0.5px;
-  }
-  .nav-logo span { color: var(--cyan); }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a {
-    font-size: 0.82rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--silver);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--cyan); }
-  .nav-cta {
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--navy);
-    background: var(--cyan);
-    padding: 0.45rem 1.2rem;
-    border-radius: 3px;
-    text-decoration: none;
-    transition: opacity 0.2s;
-  }
-  .nav-cta:hover { opacity: 0.85; }
+/* Hamburger */
+.nav-hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; padding: 4px; background: none; border: none;
+}
+.nav-hamburger span {
+  display: block; width: 22px; height: 2px;
+  background: var(--white); border-radius: 2px; transition: all 0.3s;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  /* ── HERO ── */
-  #hero {
-    min-height: 100vh;
-    display: flex; align-items: center;
-    padding: 0 4rem;
-    position: relative;
-    overflow: hidden;
-  }
+.nav-mobile-menu {
+  display: none; position: fixed;
+  top: 57px; left: 0; right: 0;
+  background: rgba(10,15,30,0.97);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--navy-border);
+  padding: 1.5rem var(--px) 2rem;
+  z-index: 199; flex-direction: column; gap: 1.25rem;
+}
+.nav-mobile-menu.open { display: flex; }
+.nav-mobile-menu a {
+  font-size: 1rem; font-weight: 500; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--silver); text-decoration: none;
+}
+.nav-mobile-menu a:last-child {
+  color: var(--navy); background: var(--cyan);
+  padding: 0.6rem 1.2rem; border-radius: 3px;
+  font-weight: 700; display: inline-block; margin-top: 0.5rem;
+}
 
-  /* Grid background */
-  #hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(0,212,255,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,212,255,0.04) 1px, transparent 1px);
-    background-size: 60px 60px;
-    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 80%);
-  }
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 7rem var(--px) 4rem;
+  position: relative; overflow: hidden;
+}
+#hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,212,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.035) 1px, transparent 1px);
+  background-size: clamp(40px,6vw,70px) clamp(40px,6vw,70px);
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 80%);
+  pointer-events: none;
+}
+#hero::after {
+  content: '';
+  position: absolute;
+  width: min(600px, 80vw); height: min(600px, 80vw);
+  background: radial-gradient(circle, rgba(0,212,255,0.07) 0%, transparent 70%);
+  right: -80px; top: 50%; transform: translateY(-50%);
+  border-radius: 50%; pointer-events: none;
+}
+.hero-inner { max-width: min(900px, 100%); position: relative; z-index: 1; }
 
-  /* Glow orb */
-  #hero::after {
-    content: '';
-    position: absolute;
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(0,212,255,0.08) 0%, transparent 70%);
-    right: -100px; top: 50%;
-    transform: translateY(-50%);
-    border-radius: 50%;
-    pointer-events: none;
-  }
+.available-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: var(--font-mono); font-size: 0.68rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--green);
+  background: rgba(74,222,128,0.1);
+  border: 1px solid rgba(74,222,128,0.25);
+  padding: 0.3rem 0.8rem; border-radius: 100px; margin-bottom: 1.5rem;
+}
+.available-badge .pulse {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--green); animation: pulse 1.8s infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%      { opacity:0.4; transform:scale(0.7); }
+}
 
-  .hero-inner {
-    max-width: 900px;
-    position: relative; z-index: 1;
-  }
+.hero-eyebrow {
+  font-family: var(--font-mono); font-size: 0.74rem;
+  color: var(--cyan); letter-spacing: 0.18em; text-transform: uppercase;
+  margin-bottom: 1.1rem;
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.hero-eyebrow::before {
+  content: ''; display: inline-block;
+  width: 28px; height: 1px; background: var(--cyan); flex-shrink: 0;
+}
+.hero-name {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 800; line-height: 1.0;
+  letter-spacing: clamp(-1px,-0.03em,-2px);
+  color: var(--white); margin-bottom: 0.35rem;
+}
+.hero-name .accent { color: var(--cyan); }
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(0.95rem, 2.2vw, 1.5rem);
+  font-weight: 600; color: var(--silver);
+  margin-bottom: 1.6rem; letter-spacing: -0.2px;
+}
+.hero-summary {
+  font-size: clamp(0.88rem, 1.5vw, 1rem);
+  color: var(--silver); max-width: 600px;
+  line-height: 1.8; margin-bottom: 2.2rem;
+}
+.hero-stats {
+  display: flex; flex-wrap: wrap; gap: clamp(1.2rem, 4vw, 3rem);
+  margin-bottom: 2.2rem;
+}
+.stat-item { display: flex; flex-direction: column; min-width: 70px; }
+.stat-number {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 800; color: var(--cyan); line-height: 1;
+}
+.stat-label {
+  font-size: 0.67rem; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--silver-dim); margin-top: 0.2rem;
+}
+.hero-actions { display: flex; gap: 0.85rem; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  background: var(--cyan); color: var(--navy);
+  font-weight: 700; font-size: 0.78rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 0.7rem 1.5rem; border-radius: 3px;
+  text-decoration: none; transition: opacity 0.2s, transform 0.2s;
+  white-space: nowrap;
+}
+.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  border: 1px solid var(--navy-border); color: var(--silver);
+  font-weight: 500; font-size: 0.78rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 0.7rem 1.5rem; border-radius: 3px;
+  text-decoration: none; transition: border-color 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+.btn-outline:hover { border-color: var(--cyan); color: var(--cyan); }
 
-  .hero-eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: var(--cyan);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    margin-bottom: 1.2rem;
-    display: flex; align-items: center; gap: 0.75rem;
-  }
-  .hero-eyebrow::before {
-    content: '';
-    display: inline-block;
-    width: 32px; height: 1px;
-    background: var(--cyan);
-  }
+/* ── LAYOUT WRAPPER ── */
+.section-wrap {
+  width: 100%; max-width: calc(var(--max-w) + var(--px) * 2);
+  margin: 0 auto;
+  padding: var(--section-py) var(--px);
+}
+hr.divider {
+  border: none; border-top: 1px solid var(--navy-border);
+  max-width: calc(var(--max-w) + var(--px) * 2);
+  margin: 0 auto;
+}
+.section-eyebrow {
+  font-family: var(--font-mono); font-size: 0.68rem;
+  color: var(--cyan); letter-spacing: 0.2em; text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.section-eyebrow::before {
+  content: ''; width: 22px; height: 1px;
+  background: var(--cyan); flex-shrink: 0;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  font-weight: 800; color: var(--white);
+  letter-spacing: -0.8px; margin-bottom: 0.45rem;
+}
+.section-sub {
+  font-size: clamp(0.85rem, 1.4vw, 0.95rem);
+  color: var(--silver); max-width: 520px; margin-bottom: 3rem;
+  line-height: 1.7;
+}
 
-  .hero-name {
-    font-family: var(--font-display);
-    font-size: clamp(3rem, 6vw, 5.5rem);
-    font-weight: 800;
-    line-height: 1.0;
-    letter-spacing: -2px;
-    color: var(--white);
-    margin-bottom: 0.4rem;
-  }
-  .hero-name .accent { color: var(--cyan); }
+/* ── SKILLS ── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 1.25rem;
+}
+.skill-group {
+  background: var(--navy-card); border: 1px solid var(--navy-border);
+  border-radius: 8px; padding: 1.35rem;
+  transition: border-color 0.2s;
+}
+.skill-group:hover { border-color: rgba(0,212,255,0.3); }
+.skill-group-title {
+  font-family: var(--font-mono); font-size: 0.66rem;
+  font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--cyan); margin-bottom: 0.9rem;
+  padding-bottom: 0.7rem; border-bottom: 1px solid var(--navy-border);
+}
+.skill-chips { display: flex; flex-wrap: wrap; gap: 0.38rem; }
+.chip {
+  font-size: 0.72rem; font-weight: 500; color: var(--silver);
+  background: var(--slate); padding: 0.26rem 0.6rem;
+  border-radius: 3px; border: 1px solid var(--navy-border);
+  transition: color 0.2s, border-color 0.2s;
+}
+.chip:hover { color: var(--white); border-color: rgba(0,212,255,0.35); }
 
-  .hero-title {
-    font-family: var(--font-display);
-    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
-    font-weight: 600;
-    color: var(--silver);
-    margin-bottom: 1.8rem;
-    letter-spacing: -0.3px;
-  }
+/* ── TIMELINE ── */
+.timeline { position: relative; padding-left: clamp(1.5rem, 4vw, 2.5rem); }
+.timeline::before {
+  content: ''; position: absolute;
+  left: 0; top: 12px; bottom: 12px; width: 2px;
+  background: linear-gradient(to bottom, var(--cyan) 0%, var(--cyan-dim) 40%, var(--navy-border) 100%);
+  border-radius: 1px;
+}
+.tl-item { position: relative; margin-bottom: 3rem; padding-left: clamp(1rem,3vw,1.5rem); }
+.tl-item:last-child { margin-bottom: 0; }
+.tl-item::before {
+  content: ''; position: absolute;
+  left: calc(clamp(1.5rem,4vw,2.5rem) * -1 + -1px);
+  top: 10px; width: 12px; height: 12px;
+  border-radius: 50%; background: var(--navy);
+  border: 2px solid var(--cyan);
+  box-shadow: 0 0 0 4px var(--cyan-glow);
+}
+.tl-item.past::before { border-color: var(--silver-dim); box-shadow: none; }
+.tl-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 0.3rem; }
+.tl-company { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--white); }
+.tl-badge {
+  font-family: var(--font-mono); font-size: 0.62rem; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.18rem 0.5rem; border-radius: 2px;
+}
+.badge-active { background: rgba(0,212,255,0.12); color: var(--cyan); border: 1px solid rgba(0,212,255,0.3); }
+.badge-past   { background: var(--slate); color: var(--silver); border: 1px solid var(--navy-border); }
+.tl-role { font-size: 0.78rem; font-weight: 600; color: var(--cyan); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 0.15rem; }
+.tl-period { font-family: var(--font-mono); font-size: 0.68rem; color: var(--silver-dim); margin-bottom: 0.9rem; }
 
-  .hero-summary {
-    font-size: 1rem;
-    color: var(--silver);
-    max-width: 620px;
-    line-height: 1.75;
-    margin-bottom: 2.5rem;
-  }
+.project-card {
+  background: var(--navy-card); border: 1px solid var(--navy-border);
+  border-radius: 8px; padding: 1.1rem 1.35rem;
+  margin-bottom: 0.85rem; transition: border-color 0.2s;
+}
+.project-card:hover { border-color: rgba(0,212,255,0.25); }
+.project-card:last-child { margin-bottom: 0; }
+.project-name { font-family: var(--font-display); font-size: 0.92rem; font-weight: 700; color: var(--white); margin-bottom: 0.55rem; }
+.project-bullets { list-style: none; padding: 0; }
+.project-bullets li {
+  font-size: 0.83rem; color: var(--silver); line-height: 1.65;
+  padding-left: 1rem; position: relative; margin-bottom: 0.28rem;
+}
+.project-bullets li::before { content: '›'; position: absolute; left: 0; color: var(--cyan); font-weight: 700; }
+.project-tech { display: flex; flex-wrap: wrap; gap: 0.32rem; margin-top: 0.8rem; }
+.tech-tag {
+  font-family: var(--font-mono); font-size: 0.62rem;
+  color: var(--cyan-dim); background: rgba(0,212,255,0.06);
+  border: 1px solid rgba(0,212,255,0.15);
+  padding: 0.13rem 0.48rem; border-radius: 2px;
+}
 
-  .hero-stats {
-    display: flex; gap: 3rem;
-    margin-bottom: 2.5rem;
-  }
-  .stat-item { display: flex; flex-direction: column; }
-  .stat-number {
-    font-family: var(--font-display);
-    font-size: 2rem;
-    font-weight: 800;
-    color: var(--cyan);
-    line-height: 1;
-  }
-  .stat-label {
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--silver-dim);
-    margin-top: 0.2rem;
-  }
+/* ── AWARDS ── */
+.awards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 270px), 1fr));
+  gap: 1.1rem;
+}
+.award-card {
+  background: var(--navy-card); border: 1px solid var(--navy-border);
+  border-radius: 8px; padding: 1.3rem;
+  display: flex; gap: 0.9rem; align-items: flex-start;
+  transition: border-color 0.2s;
+}
+.award-card:hover { border-color: rgba(255,184,48,0.35); }
+.award-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 0.05rem; }
+.award-title { font-family: var(--font-display); font-size: 0.88rem; font-weight: 700; color: var(--white); margin-bottom: 0.2rem; }
+.award-org { font-size: 0.72rem; color: var(--gold); font-weight: 600; margin-bottom: 0.28rem; }
+.award-desc { font-size: 0.76rem; color: var(--silver); line-height: 1.55; }
 
-  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .btn-primary {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    background: var(--cyan);
-    color: var(--navy);
-    font-weight: 700;
-    font-size: 0.82rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 0.75rem 1.6rem;
-    border-radius: 3px;
-    text-decoration: none;
-    transition: opacity 0.2s, transform 0.2s;
-  }
-  .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
-  .btn-outline {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    border: 1px solid var(--navy-border);
-    color: var(--silver);
-    font-weight: 500;
-    font-size: 0.82rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 0.75rem 1.6rem;
-    border-radius: 3px;
-    text-decoration: none;
-    transition: border-color 0.2s, color 0.2s;
-  }
-  .btn-outline:hover { border-color: var(--cyan); color: var(--cyan); }
+/* ── CONTACT ── */
+#contact {
+  text-align: center; padding: var(--section-py) var(--px);
+  position: relative;
+}
+#contact::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent, rgba(0,212,255,0.03) 50%, transparent);
+  pointer-events: none;
+}
+.contact-inner { max-width: 600px; margin: 0 auto; position: relative; z-index: 1; }
+.contact-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800; color: var(--white);
+  letter-spacing: -1px; margin-bottom: 1rem;
+}
+.contact-title span { color: var(--cyan); }
+.contact-sub { font-size: 0.93rem; color: var(--silver); margin-bottom: 2.2rem; line-height: 1.75; }
+.contact-links { display: flex; gap: 0.85rem; justify-content: center; flex-wrap: wrap; }
+.contact-link {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.05em;
+  text-transform: uppercase; text-decoration: none;
+  padding: 0.65rem 1.3rem; border-radius: 3px; transition: all 0.2s;
+  white-space: nowrap;
+}
+.contact-link.primary { background: var(--cyan); color: var(--navy); }
+.contact-link.primary:hover { opacity: 0.88; }
+.contact-link.secondary { border: 1px solid var(--navy-border); color: var(--silver); }
+.contact-link.secondary:hover { border-color: var(--cyan); color: var(--cyan); }
 
-  /* ── SECTIONS ── */
-  section {
-    padding: 6rem 4rem;
-    max-width: 1140px;
-    margin: 0 auto;
-  }
-  .section-eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: var(--cyan);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 0.6rem;
-    display: flex; align-items: center; gap: 0.6rem;
-  }
-  .section-eyebrow::before {
-    content: '';
-    width: 24px; height: 1px;
-    background: var(--cyan);
-  }
-  .section-title {
-    font-family: var(--font-display);
-    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-    font-weight: 800;
-    color: var(--white);
-    letter-spacing: -1px;
-    margin-bottom: 0.5rem;
-  }
-  .section-sub {
-    font-size: 0.95rem;
-    color: var(--silver);
-    max-width: 540px;
-    margin-bottom: 3.5rem;
-  }
-  hr.divider {
-    border: none;
-    border-top: 1px solid var(--navy-border);
-    margin: 0;
-  }
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--navy-border);
+  padding: 1.75rem var(--px);
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 0.75rem;
+}
+.footer-name { font-family: var(--font-display); font-size: 0.82rem; font-weight: 700; color: var(--silver-dim); }
+.footer-note { font-family: var(--font-mono); font-size: 0.67rem; color: var(--silver-dim); }
 
-  /* ── SKILLS ── */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.5rem;
-  }
-  .skill-group {
-    background: var(--navy-card);
-    border: 1px solid var(--navy-border);
-    border-radius: 8px;
-    padding: 1.5rem;
-    transition: border-color 0.2s;
-  }
-  .skill-group:hover { border-color: rgba(0,212,255,0.3); }
-  .skill-group-title {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--cyan);
-    margin-bottom: 1rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--navy-border);
-  }
-  .skill-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-  .chip {
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: var(--silver);
-    background: var(--slate);
-    padding: 0.28rem 0.65rem;
-    border-radius: 3px;
-    border: 1px solid var(--navy-border);
-    transition: color 0.2s, border-color 0.2s;
-  }
-  .chip:hover { color: var(--white); border-color: rgba(0,212,255,0.35); }
+/* ── FADE-IN ── */
+.fade-in { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
 
-  /* ── TIMELINE (PCB RAIL) ── */
-  .timeline { position: relative; padding-left: 2.5rem; }
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 12px; bottom: 12px;
-    width: 2px;
-    background: linear-gradient(to bottom, var(--cyan) 0%, var(--cyan-dim) 40%, var(--navy-border) 100%);
-    border-radius: 1px;
-  }
+/* ─────────────────────────────────────────
+   CHATBOT
+───────────────────────────────────────── */
+#chat-fab {
+  position: fixed; bottom: 1.75rem; right: 1.75rem; z-index: 300;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--cyan); border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(0,212,255,0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+#chat-fab:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(0,212,255,0.45); }
+#chat-fab svg { width: 24px; height: 24px; fill: var(--navy); }
+#chat-fab .fab-badge {
+  position: absolute; top: -3px; right: -3px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--green); border: 2px solid var(--navy);
+  animation: pulse 1.8s infinite;
+}
 
-  .tl-item {
-    position: relative;
-    margin-bottom: 3.5rem;
-    padding-left: 1.5rem;
-  }
-  .tl-item:last-child { margin-bottom: 0; }
+#chat-window {
+  position: fixed; bottom: 5.5rem; right: 1.75rem; z-index: 300;
+  width: min(380px, calc(100vw - 2rem));
+  height: min(520px, calc(100vh - 8rem));
+  background: var(--navy-card); border: 1px solid var(--navy-border);
+  border-radius: 14px; display: flex; flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.55);
+  transform: scale(0.92) translateY(12px);
+  opacity: 0; pointer-events: none;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+#chat-window.open { transform: scale(1) translateY(0); opacity: 1; pointer-events: all; }
 
-  /* PCB dot */
-  .tl-item::before {
-    content: '';
-    position: absolute;
-    left: -2.65rem;
-    top: 10px;
-    width: 12px; height: 12px;
-    border-radius: 50%;
-    background: var(--navy);
-    border: 2px solid var(--cyan);
-    box-shadow: 0 0 0 4px var(--cyan-glow);
-  }
+.chat-header {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.9rem 1.1rem;
+  background: var(--slate); border-bottom: 1px solid var(--navy-border);
+  flex-shrink: 0;
+}
+.chat-avatar {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--cyan), var(--cyan-dim));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; flex-shrink: 0;
+}
+.chat-header-info { flex: 1; min-width: 0; }
+.chat-header-name { font-family: var(--font-display); font-size: 0.88rem; font-weight: 700; color: var(--white); }
+.chat-header-sub { font-size: 0.68rem; color: var(--green); display: flex; align-items: center; gap: 0.35rem; }
+.chat-header-sub::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--green); }
+.chat-close {
+  background: none; border: none; cursor: pointer;
+  color: var(--silver); font-size: 1.1rem; padding: 2px; line-height: 1;
+  transition: color 0.2s;
+}
+.chat-close:hover { color: var(--white); }
 
-  /* Faded dot for older roles */
-  .tl-item.past::before { border-color: var(--silver-dim); box-shadow: none; }
+.chat-messages {
+  flex: 1; overflow-y: auto; padding: 1rem;
+  display: flex; flex-direction: column; gap: 0.75rem;
+  scroll-behavior: smooth;
+}
+.chat-messages::-webkit-scrollbar { width: 3px; }
+.chat-messages::-webkit-scrollbar-thumb { background: var(--navy-border); border-radius: 2px; }
 
-  .tl-meta {
-    display: flex; align-items: center; flex-wrap: wrap; gap: 0.75rem;
-    margin-bottom: 0.4rem;
-  }
-  .tl-company {
-    font-family: var(--font-display);
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--white);
-  }
-  .tl-badge {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.2rem 0.55rem;
-    border-radius: 2px;
-  }
-  .badge-active { background: rgba(0,212,255,0.12); color: var(--cyan); border: 1px solid rgba(0,212,255,0.3); }
-  .badge-past   { background: var(--slate); color: var(--silver); border: 1px solid var(--navy-border); }
-  .tl-role {
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--cyan);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    margin-bottom: 0.2rem;
-  }
-  .tl-period {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: var(--silver-dim);
-    margin-bottom: 1rem;
-  }
+.msg { display: flex; gap: 0.5rem; align-items: flex-end; max-width: 90%; }
+.msg.bot { align-self: flex-start; }
+.msg.user { align-self: flex-end; flex-direction: row-reverse; }
 
-  .project-card {
-    background: var(--navy-card);
-    border: 1px solid var(--navy-border);
-    border-radius: 8px;
-    padding: 1.25rem 1.5rem;
-    margin-bottom: 1rem;
-    transition: border-color 0.2s;
-  }
-  .project-card:hover { border-color: rgba(0,212,255,0.25); }
-  .project-card:last-child { margin-bottom: 0; }
-  .project-name {
-    font-family: var(--font-display);
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 0.6rem;
-  }
-  .project-bullets { list-style: none; padding: 0; }
-  .project-bullets li {
-    font-size: 0.85rem;
-    color: var(--silver);
-    line-height: 1.65;
-    padding-left: 1rem;
-    position: relative;
-    margin-bottom: 0.3rem;
-  }
-  .project-bullets li::before {
-    content: '›';
-    position: absolute; left: 0;
-    color: var(--cyan);
-    font-weight: 700;
-  }
-  .project-tech {
-    display: flex; flex-wrap: wrap; gap: 0.35rem;
-    margin-top: 0.85rem;
-  }
-  .tech-tag {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: var(--cyan-dim);
-    background: rgba(0,212,255,0.06);
-    border: 1px solid rgba(0,212,255,0.15);
-    padding: 0.15rem 0.5rem;
-    border-radius: 2px;
-  }
+.msg-avatar {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--cyan), var(--cyan-dim));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; flex-shrink: 0;
+}
+.msg-bubble {
+  padding: 0.55rem 0.85rem; border-radius: 10px;
+  font-size: 0.82rem; line-height: 1.55; max-width: 100%;
+}
+.msg.bot .msg-bubble {
+  background: var(--slate); color: var(--white);
+  border-bottom-left-radius: 3px;
+}
+.msg.user .msg-bubble {
+  background: var(--cyan); color: var(--navy); font-weight: 500;
+  border-bottom-right-radius: 3px;
+}
 
-  /* ── AWARDS ── */
-  .awards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.25rem;
-  }
-  .award-card {
-    background: var(--navy-card);
-    border: 1px solid var(--navy-border);
-    border-radius: 8px;
-    padding: 1.4rem;
-    display: flex; gap: 1rem;
-    align-items: flex-start;
-    transition: border-color 0.2s;
-  }
-  .award-card:hover { border-color: rgba(255,184,48,0.35); }
-  .award-icon {
-    font-size: 1.5rem;
-    flex-shrink: 0;
-    margin-top: 0.1rem;
-  }
-  .award-title {
-    font-family: var(--font-display);
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 0.25rem;
-  }
-  .award-org {
-    font-size: 0.75rem;
-    color: var(--gold);
-    font-weight: 600;
-    margin-bottom: 0.3rem;
-  }
-  .award-desc { font-size: 0.78rem; color: var(--silver); line-height: 1.55; }
+.chat-suggestions {
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  padding: 0 1rem 0.65rem;
+}
+.suggestion-chip {
+  font-size: 0.72rem; color: var(--cyan);
+  background: rgba(0,212,255,0.08);
+  border: 1px solid rgba(0,212,255,0.25);
+  padding: 0.28rem 0.65rem; border-radius: 100px;
+  cursor: pointer; transition: background 0.2s;
+  white-space: nowrap;
+}
+.suggestion-chip:hover { background: rgba(0,212,255,0.18); }
 
-  /* ── CONTACT ── */
-  #contact {
-    text-align: center;
-    padding: 6rem 4rem;
-    position: relative;
-  }
-  #contact::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(to bottom, transparent, rgba(0,212,255,0.03) 50%, transparent);
-    pointer-events: none;
-  }
-  .contact-inner { max-width: 600px; margin: 0 auto; position: relative; z-index: 1; }
-  .contact-title {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 3.2rem);
-    font-weight: 800;
-    color: var(--white);
-    letter-spacing: -1px;
-    margin-bottom: 1rem;
-  }
-  .contact-title span { color: var(--cyan); }
-  .contact-sub { font-size: 0.95rem; color: var(--silver); margin-bottom: 2.5rem; line-height: 1.7; }
-  .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-  .contact-link {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    font-size: 0.82rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 0.7rem 1.4rem;
-    border-radius: 3px;
-    transition: all 0.2s;
-  }
-  .contact-link.primary {
-    background: var(--cyan); color: var(--navy);
-  }
-  .contact-link.primary:hover { opacity: 0.88; }
-  .contact-link.secondary {
-    border: 1px solid var(--navy-border); color: var(--silver);
-  }
-  .contact-link.secondary:hover { border-color: var(--cyan); color: var(--cyan); }
+.chat-input-row {
+  display: flex; gap: 0.5rem; padding: 0.75rem 1rem;
+  border-top: 1px solid var(--navy-border); flex-shrink: 0;
+  background: var(--navy-card);
+}
+#chat-input {
+  flex: 1; background: var(--slate); border: 1px solid var(--navy-border);
+  border-radius: 8px; padding: 0.5rem 0.75rem;
+  font-family: var(--font-body); font-size: 0.82rem;
+  color: var(--white); outline: none; transition: border-color 0.2s;
+  resize: none; min-height: 38px; max-height: 100px;
+  line-height: 1.4;
+}
+#chat-input:focus { border-color: rgba(0,212,255,0.4); }
+#chat-input::placeholder { color: var(--silver-dim); }
+#chat-send {
+  background: var(--cyan); border: none; border-radius: 8px;
+  width: 38px; height: 38px; cursor: pointer; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.2s; align-self: flex-end;
+}
+#chat-send:hover { opacity: 0.85; }
+#chat-send svg { width: 16px; height: 16px; fill: var(--navy); }
 
-  /* ── FOOTER ── */
-  footer {
-    border-top: 1px solid var(--navy-border);
-    padding: 2rem 4rem;
-    display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 1rem;
-  }
-  .footer-name {
-    font-family: var(--font-display);
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--silver-dim);
-  }
-  .footer-note {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    color: var(--silver-dim);
-  }
+.typing-indicator { display: flex; gap: 4px; align-items: center; padding: 2px 0; }
+.typing-indicator span {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--silver);
+  animation: typing-bounce 1.2s infinite ease-in-out;
+}
+.typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+.typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typing-bounce {
+  0%,80%,100% { transform: scale(0.7); opacity: 0.5; }
+  40%          { transform: scale(1); opacity: 1; }
+}
 
-  /* ── FADE-IN ── */
-  .fade-in {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.65s ease, transform 0.65s ease;
-  }
-  .fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* ── AVAILABLE BADGE ── */
-  .available-badge {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #4ADE80;
-    background: rgba(74,222,128,0.1);
-    border: 1px solid rgba(74,222,128,0.25);
-    padding: 0.3rem 0.75rem;
-    border-radius: 100px;
-    margin-bottom: 1.5rem;
-  }
-  .available-badge .pulse {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: #4ADE80;
-    animation: pulse 1.8s infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50%       { opacity: 0.4; transform: scale(0.7); }
-  }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
-    #hero { padding: 6rem 1.5rem 3rem; }
-    section { padding: 4rem 1.5rem; }
-    .hero-stats { gap: 1.5rem; }
-    footer { padding: 1.5rem; flex-direction: column; text-align: center; }
-    #contact { padding: 4rem 1.5rem; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .fade-in { transition: none; }
-    .pulse   { animation: none; }
-  }
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  .nav-links, .nav-cta { display: none; }
+  .nav-hamburger { display: flex; }
+  footer { flex-direction: column; text-align: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fade-in { transition: none; }
+  .pulse, .typing-indicator span { animation: none; }
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ── NAV ── -->
 <nav>
   <a href="#hero" class="nav-logo">YG<span>.</span></a>
   <ul class="nav-links">
@@ -575,135 +560,103 @@
     <li><a href="#contact">Contact</a></li>
   </ul>
   <a href="mailto:iyogeshgulve@gmail.com" class="nav-cta">Hire Me</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<!-- HERO -->
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="#skills" onclick="closeMobileMenu()">Skills</a>
+  <a href="#experience" onclick="closeMobileMenu()">Experience</a>
+  <a href="#awards" onclick="closeMobileMenu()">Awards</a>
+  <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+  <a href="mailto:iyogeshgulve@gmail.com">✉ Hire Me</a>
+</div>
+
+<!-- ── HERO ── -->
 <section id="hero">
   <div class="hero-inner">
     <div class="available-badge"><span class="pulse"></span>Immediately Available</div>
     <div class="hero-eyebrow">Senior Software Engineer · Pune, India</div>
     <h1 class="hero-name">Yogesh<br/><span class="accent">Gulve</span></h1>
-    <p class="hero-title">.NET Full-Stack Architect · 18+ Years · Banking & Enterprise</p>
-    <p class="hero-summary">
-      Delivering mission-critical enterprise solutions for Fortune 500 clients—from HSBC hedge accounting platforms to airline crew systems. I lead teams, build from the ground up, and ship on time.
-    </p>
+    <p class="hero-title">.NET Full-Stack Architect · 18+ Years · Banking &amp; Enterprise</p>
+    <p class="hero-summary">Delivering mission-critical enterprise solutions for Fortune 500 clients — from HSBC hedge accounting platforms to airline crew systems. I lead teams, build from the ground up, and ship on time.</p>
     <div class="hero-stats">
-      <div class="stat-item">
-        <span class="stat-number">18+</span>
-        <span class="stat-label">Years Experience</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number">5+</span>
-        <span class="stat-label">Industry Sectors</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number">F500</span>
-        <span class="stat-label">Clients Served</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number">0</span>
-        <span class="stat-label">Critical Defects</span>
-      </div>
+      <div class="stat-item"><span class="stat-number">18+</span><span class="stat-label">Years Exp.</span></div>
+      <div class="stat-item"><span class="stat-number">5+</span><span class="stat-label">Sectors</span></div>
+      <div class="stat-item"><span class="stat-number">F500</span><span class="stat-label">Clients</span></div>
+      <div class="stat-item"><span class="stat-number">0</span><span class="stat-label">Prod. Defects</span></div>
     </div>
     <div class="hero-actions">
-      <a href="mailto:iyogeshgulve@gmail.com" class="btn-primary">
-        ✉ Get In Touch
-      </a>
-      <a href="https://linkedin.com/in/yogeshgulve" target="_blank" class="btn-outline">
-        LinkedIn Profile →
-      </a>
+      <a href="mailto:iyogeshgulve@gmail.com" class="btn-primary">✉ Get In Touch</a>
+      <a href="https://linkedin.com/in/yogeshgulve" target="_blank" class="btn-outline">LinkedIn →</a>
     </div>
   </div>
 </section>
 
 <hr class="divider"/>
 
-<!-- SKILLS -->
-<section id="skills" style="max-width:1140px; margin:0 auto;">
+<!-- ── SKILLS ── -->
+<div class="section-wrap" id="skills">
   <div class="section-eyebrow">Core Competencies</div>
   <h2 class="section-title">Technical Stack</h2>
-  <p class="section-sub">Across backend, frontend, cloud, and AI—built for enterprise scale.</p>
-
+  <p class="section-sub">Across backend, frontend, cloud, and AI — built for enterprise scale.</p>
   <div class="skills-grid fade-in">
     <div class="skill-group">
       <div class="skill-group-title">Backend</div>
       <div class="skill-chips">
-        <span class="chip">C# / .NET Core</span>
-        <span class="chip">ASP.NET</span>
-        <span class="chip">Web API</span>
-        <span class="chip">Microservices</span>
-        <span class="chip">WCF</span>
-        <span class="chip">MVC</span>
-        <span class="chip">LINQ</span>
-        <span class="chip">Windows Services</span>
-        <span class="chip">REST</span>
+        <span class="chip">C# / .NET Core</span><span class="chip">ASP.NET</span><span class="chip">Web API</span>
+        <span class="chip">Microservices</span><span class="chip">WCF</span><span class="chip">MVC</span>
+        <span class="chip">LINQ</span><span class="chip">Windows Services</span><span class="chip">REST</span>
       </div>
     </div>
     <div class="skill-group">
       <div class="skill-group-title">Frontend</div>
       <div class="skill-chips">
-        <span class="chip">Angular</span>
-        <span class="chip">TypeScript</span>
-        <span class="chip">JavaScript</span>
-        <span class="chip">HTML5 / CSS</span>
-        <span class="chip">Web Components</span>
-        <span class="chip">Lit Elements</span>
-        <span class="chip">Bootstrap</span>
+        <span class="chip">Angular</span><span class="chip">TypeScript</span><span class="chip">JavaScript</span>
+        <span class="chip">HTML5 / CSS</span><span class="chip">Web Components</span>
+        <span class="chip">Lit Elements</span><span class="chip">Bootstrap</span>
       </div>
     </div>
     <div class="skill-group">
-      <div class="skill-group-title">Cloud & DevOps</div>
+      <div class="skill-group-title">Cloud &amp; DevOps</div>
       <div class="skill-chips">
-        <span class="chip">Azure DevOps / CI-CD</span>
-        <span class="chip">Azure Functions</span>
-        <span class="chip">Azure Blob Storage</span>
-        <span class="chip">Azure Service Bus</span>
-        <span class="chip">AWS Lambda</span>
-        <span class="chip">AWS S3</span>
-        <span class="chip">AWS Step Functions</span>
-        <span class="chip">Jenkins</span>
-        <span class="chip">TeamCity</span>
-        <span class="chip">Octopus Deploy</span>
+        <span class="chip">Azure DevOps / CI-CD</span><span class="chip">Azure Functions</span>
+        <span class="chip">Azure Blob Storage</span><span class="chip">Azure Service Bus</span>
+        <span class="chip">AWS Lambda</span><span class="chip">AWS S3</span>
+        <span class="chip">AWS Step Functions</span><span class="chip">Jenkins</span>
+        <span class="chip">TeamCity</span><span class="chip">Octopus Deploy</span>
       </div>
     </div>
     <div class="skill-group">
-      <div class="skill-group-title">Data & Quality</div>
+      <div class="skill-group-title">Data &amp; Quality</div>
       <div class="skill-chips">
-        <span class="chip">MS SQL Server</span>
-        <span class="chip">PostgreSQL</span>
-        <span class="chip">SonarQube</span>
-        <span class="chip">Grafana</span>
-        <span class="chip">Power BI</span>
+        <span class="chip">MS SQL Server</span><span class="chip">PostgreSQL</span>
+        <span class="chip">SonarQube</span><span class="chip">Grafana</span><span class="chip">Power BI</span>
       </div>
     </div>
     <div class="skill-group">
-      <div class="skill-group-title">AI & LLM Tools</div>
+      <div class="skill-group-title">AI &amp; LLM Tools</div>
       <div class="skill-chips">
-        <span class="chip">GitHub Copilot</span>
-        <span class="chip">Claude API</span>
-        <span class="chip">OpenAI Codex</span>
-        <span class="chip">Prompt Engineering</span>
-        <span class="chip">AI Agents</span>
-        <span class="chip">Semantic Kernel</span>
+        <span class="chip">GitHub Copilot</span><span class="chip">Claude API</span>
+        <span class="chip">OpenAI Codex</span><span class="chip">Prompt Engineering</span>
+        <span class="chip">AI Agents</span><span class="chip">Semantic Kernel</span>
       </div>
     </div>
     <div class="skill-group">
-      <div class="skill-group-title">Platforms & Tools</div>
+      <div class="skill-group-title">Platforms &amp; Tools</div>
       <div class="skill-chips">
-        <span class="chip">Visual Studio</span>
-        <span class="chip">Git / GitHub / TFS</span>
-        <span class="chip">JIRA / Azure Boards</span>
-        <span class="chip">IIS</span>
-        <span class="chip">Agile / Scrum</span>
+        <span class="chip">Visual Studio</span><span class="chip">Git / GitHub / TFS</span>
+        <span class="chip">JIRA / Azure Boards</span><span class="chip">IIS</span><span class="chip">Agile / Scrum</span>
       </div>
     </div>
   </div>
-</section>
+</div>
 
 <hr class="divider"/>
 
-<!-- EXPERIENCE -->
-<section id="experience" style="max-width:1140px; margin:0 auto;">
+<!-- ── EXPERIENCE ── -->
+<div class="section-wrap" id="experience">
   <div class="section-eyebrow">Career Timeline</div>
   <h2 class="section-title">Experience</h2>
   <p class="section-sub">18 years across banking, gaming, supply chain, airlines, and EdTech.</p>
@@ -718,21 +671,19 @@
       </div>
       <div class="tl-role">Specialist Technology</div>
       <div class="tl-period">July 2024 – Present</div>
-
       <div class="project-card">
         <div class="project-name">HSBC — Hedge Accounting System</div>
         <ul class="project-bullets">
-          <li>Architected enterprise-grade microservices backend for HSBC's global financial hedge accounting operations, achieving 99.9% uptime.</li>
-          <li>Implemented Grafana monitoring dashboards that cut incident response time by 40%; enforced 100% code review coverage with zero critical production defects.</li>
-          <li>Elevated code quality metrics by 35% via SonarQube, reducing technical debt; led integration testing achieving 98% coverage across all modules.</li>
-          <li>Accelerated development velocity by 25% leveraging GitHub Copilot and Codex for AI-assisted code generation and complex algorithm design.</li>
-          <li>Delivered all sprint commitments on time across every project phase. Awarded <strong>Employee of the Month – November 2024</strong>.</li>
+          <li>Architected enterprise-grade microservices backend for HSBC's global hedge accounting operations, achieving 99.9% uptime.</li>
+          <li>Grafana dashboards cut incident response time by 40%; enforced 100% code review coverage with zero critical production defects.</li>
+          <li>Elevated code quality by 35% via SonarQube; led integration testing achieving 98% coverage across all modules.</li>
+          <li>Accelerated development velocity by 25% using GitHub Copilot and Codex for AI-assisted code generation.</li>
+          <li>Delivered all sprint commitments on time every phase. Awarded <strong>Employee of the Month – November 2024</strong>.</li>
         </ul>
         <div class="project-tech">
           <span class="tech-tag">.NET Core</span><span class="tech-tag">C#</span><span class="tech-tag">Angular</span>
           <span class="tech-tag">Microservices</span><span class="tech-tag">AWS S3</span><span class="tech-tag">Jenkins</span>
           <span class="tech-tag">Grafana</span><span class="tech-tag">SonarQube</span><span class="tech-tag">GitHub Copilot</span>
-          <span class="tech-tag">Claude API</span>
         </div>
       </div>
     </div>
@@ -745,30 +696,27 @@
       </div>
       <div class="tl-role">Senior Software Engineer</div>
       <div class="tl-period">December 2020 – June 2024</div>
-
       <div class="project-card">
         <div class="project-name">Desire2Learn — Learning Management Platform</div>
         <ul class="project-bullets">
-          <li>Engineered full-stack course management system supporting 50,000+ concurrent users with zero downtime; delivered 2 weeks ahead of schedule.</li>
-          <li>Integrated 5+ third-party APIs via .NET Core Web API with 99.95% uptime; improved user engagement 35% and cut page load time by 50% with Web Components / Lit Elements.</li>
-          <li>Deployed AWS Lambda functions, reducing infrastructure costs by 30% while improving scalability.</li>
+          <li>Full-stack course management supporting 50,000+ concurrent users with zero downtime; delivered 2 weeks early.</li>
+          <li>Integrated 5+ third-party APIs at 99.95% uptime; improved user engagement 35% and cut page load time 50% with Lit Elements.</li>
+          <li>AWS Lambda functions reduced infrastructure costs by 30% while improving scalability.</li>
         </ul>
         <div class="project-tech">
-          <span class="tech-tag">.NET Core</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">Web Components</span>
-          <span class="tech-tag">Lit Elements</span><span class="tech-tag">AWS Lambda</span>
+          <span class="tech-tag">.NET Core</span><span class="tech-tag">PostgreSQL</span>
+          <span class="tech-tag">Web Components</span><span class="tech-tag">Lit Elements</span><span class="tech-tag">AWS Lambda</span>
         </div>
       </div>
-
       <div class="project-card">
         <div class="project-name">HAVI Connect — Supply Chain Collaboration Platform</div>
         <ul class="project-bullets">
-          <li>Built cloud-based supply chain platform connecting 1,000+ restaurant locations with HAVI logistics, processing 10,000+ daily orders with 99.8% availability.</li>
-          <li>Implemented ML-driven order proposal engine improving forecast accuracy by 25% and reducing errors by 40%; slashed claim resolution from 5 days to 24 hours.</li>
-          <li>Nominated for EPAM Celebrates You Award (2023) for outstanding delivery and client satisfaction.</li>
+          <li>Cloud-based platform connecting 1,000+ restaurants with HAVI logistics — 10,000+ daily orders at 99.8% availability.</li>
+          <li>ML-driven order engine improved forecast accuracy 25% and slashed claim resolution from 5 days to 24 hours.</li>
+          <li>Nominated for EPAM Celebrates You Award (2023).</li>
         </ul>
         <div class="project-tech">
-          <span class="tech-tag">C#</span><span class="tech-tag">SQL Server</span><span class="tech-tag">Azure</span>
-          <span class="tech-tag">MVC 5</span><span class="tech-tag">Web API</span>
+          <span class="tech-tag">C#</span><span class="tech-tag">SQL Server</span><span class="tech-tag">Azure</span><span class="tech-tag">MVC 5</span>
         </div>
       </div>
     </div>
@@ -781,34 +729,30 @@
       </div>
       <div class="tl-role">Technical Specialist</div>
       <div class="tl-period">May 2014 – September 2020</div>
-
       <div class="project-card">
         <div class="project-name">IndiGo Airlines — AIMS Migration</div>
         <ul class="project-bullets">
-          <li>Delivered large-scale enterprise migration (50+ modules) from ROCADE to AIMS within 12-month timeline, with zero-defect cutover supporting 3,000+ crew members.</li>
-          <li>Established India development centre after completing knowledge transfer from Estonia client in just 2 weeks.</li>
+          <li>Zero-defect migration of 50+ modules from ROCADE to AIMS, supporting 3,000+ crew members; established India dev centre post 2-week Estonia knowledge transfer.</li>
           <li>Awarded Customer Centricity (Emerging) 2017-18 and multiple Certificates of Excellence.</li>
         </ul>
         <div class="project-tech">
           <span class="tech-tag">C#</span><span class="tech-tag">WCF</span><span class="tech-tag">SQL Server</span><span class="tech-tag">Windows Service</span>
         </div>
       </div>
-
       <div class="project-card">
         <div class="project-name">Playcheck — Casino Transaction Tracking (Team Lead)</div>
         <ul class="project-bullets">
-          <li>Led 4-member team to deliver RESTful API handling 100,000+ daily transactions at under 200ms response time; completed 10% under budget and 2 weeks early.</li>
-          <li>Reduced transaction processing time 45% with Angular 2 interface; achieved 100% code review approval rate.</li>
+          <li>Led 4-member team; RESTful API handling 100,000+ daily transactions at &lt;200ms. 10% under budget, 2 weeks early.</li>
+          <li>Reduced transaction processing time 45%; zero critical production defects.</li>
         </ul>
         <div class="project-tech">
           <span class="tech-tag">C#</span><span class="tech-tag">Angular 2</span><span class="tech-tag">Web API 2</span><span class="tech-tag">SQL Server</span>
         </div>
       </div>
-
       <div class="project-card">
         <div class="project-name">NEXUS — Build Optimization System</div>
         <ul class="project-bullets">
-          <li>Architected parallel-processing Windows Service cutting average build time from 6 hours to 45 minutes — an 87.5% improvement — enabling builds across 20+ simultaneous branches.</li>
+          <li>Parallel-processing Windows Service cut build time from 6 hours to 45 minutes (87.5% improvement) across 20+ simultaneous branches.</li>
         </ul>
         <div class="project-tech">
           <span class="tech-tag">C#</span><span class="tech-tag">SharpSVN</span><span class="tech-tag">Windows Service</span><span class="tech-tag">Angular 2</span>
@@ -826,9 +770,9 @@
       <div class="tl-period">March 2010 – May 2014</div>
       <div class="project-card">
         <ul class="project-bullets">
-          <li>Delivered high-volume mobile recharge platform processing 50,000+ daily transactions at 99.5% success rate.</li>
-          <li>Developed ISO 8583-compliant ATM web services for cooperative banks supporting balance enquiry, mini statement, and cash withdrawal within a 3-month deadline.</li>
-          <li>Built government portal managing 5,000+ cooperative societies; engineered IBM Assessment Program automating 10,000+ annual certifications.</li>
+          <li>High-volume mobile recharge platform — 50,000+ daily transactions at 99.5% success rate.</li>
+          <li>ISO 8583-compliant ATM web services for cooperative banks within 3-month deadline.</li>
+          <li>Government portal for 5,000+ cooperative societies; IBM Assessment Program automating 10,000+ annual certifications.</li>
         </ul>
       </div>
     </div>
@@ -843,76 +787,58 @@
       <div class="tl-period">November 2006 – June 2009</div>
       <div class="project-card">
         <ul class="project-bullets">
-          <li>Developed and launched real estate portal with 1,000+ listings and e-commerce platform processing $100K+ in transactions within first 3 months.</li>
+          <li>Real estate portal with 1,000+ listings; e-commerce platform processing $100K+ in transactions within first 3 months of launch.</li>
         </ul>
       </div>
     </div>
 
   </div>
-</section>
+</div>
 
 <hr class="divider"/>
 
-<!-- AWARDS -->
-<section id="awards" style="max-width:1140px; margin:0 auto;">
+<!-- ── AWARDS ── -->
+<div class="section-wrap" id="awards">
   <div class="section-eyebrow">Recognition</div>
-  <h2 class="section-title">Awards & Honours</h2>
+  <h2 class="section-title">Awards &amp; Honours</h2>
   <p class="section-sub">Recognized for delivery excellence, client satisfaction, and team leadership.</p>
-
   <div class="awards-grid">
-    <div class="award-card fade-in">
-      <div class="award-icon">🏆</div>
-      <div>
-        <div class="award-title">Employee of the Month</div>
-        <div class="award-org">Synechron · November 2024</div>
-        <div class="award-desc">Recognized for exceptional delivery excellence and exceeding performance expectations on the HSBC engagement.</div>
-      </div>
-    </div>
-    <div class="award-card fade-in">
-      <div class="award-icon">⭐</div>
-      <div>
-        <div class="award-title">EPAM Celebrates You — Nominee</div>
-        <div class="award-org">EPAM Systems · 2023</div>
-        <div class="award-desc">Nominated for outstanding client satisfaction and consistent on-time delivery across global projects.</div>
-      </div>
-    </div>
-    <div class="award-card fade-in">
-      <div class="award-icon">🎖</div>
-      <div>
-        <div class="award-title">Customer Centricity (Emerging)</div>
-        <div class="award-org">Zensar Technologies · 2017–18</div>
-        <div class="award-desc">Exceptional client relationship management and project success on the IndiGo Airlines migration.</div>
-      </div>
-    </div>
-    <div class="award-card fade-in">
-      <div class="award-icon">📜</div>
-      <div>
-        <div class="award-title">Certificates of Excellence × 2</div>
-        <div class="award-org">Zensar Technologies · 2018, 2020</div>
-        <div class="award-desc">Consistently exceeding delivery targets and quality metrics across multiple project engagements.</div>
-      </div>
-    </div>
-    <div class="award-card fade-in">
-      <div class="award-icon">🌟</div>
-      <div>
-        <div class="award-title">Associate of Quarter — Nominee</div>
-        <div class="award-org">Zensar Technologies · 2020</div>
-        <div class="award-desc">Leadership excellence and team mentoring achievements recognised at the organisational level.</div>
-      </div>
-    </div>
+    <div class="award-card fade-in"><div class="award-icon">🏆</div><div>
+      <div class="award-title">Employee of the Month</div>
+      <div class="award-org">Synechron · November 2024</div>
+      <div class="award-desc">Exceptional delivery and performance on the HSBC hedge accounting engagement.</div>
+    </div></div>
+    <div class="award-card fade-in"><div class="award-icon">⭐</div><div>
+      <div class="award-title">EPAM Celebrates You — Nominee</div>
+      <div class="award-org">EPAM Systems · 2023</div>
+      <div class="award-desc">Outstanding client satisfaction and consistent on-time delivery across global projects.</div>
+    </div></div>
+    <div class="award-card fade-in"><div class="award-icon">🎖</div><div>
+      <div class="award-title">Customer Centricity (Emerging)</div>
+      <div class="award-org">Zensar Technologies · 2017–18</div>
+      <div class="award-desc">Exceptional client relationship management on the IndiGo Airlines migration.</div>
+    </div></div>
+    <div class="award-card fade-in"><div class="award-icon">📜</div><div>
+      <div class="award-title">Certificates of Excellence × 2</div>
+      <div class="award-org">Zensar Technologies · 2018, 2020</div>
+      <div class="award-desc">Consistently exceeding delivery targets and quality metrics.</div>
+    </div></div>
+    <div class="award-card fade-in"><div class="award-icon">🌟</div><div>
+      <div class="award-title">Associate of Quarter — Nominee</div>
+      <div class="award-org">Zensar Technologies · 2020</div>
+      <div class="award-desc">Leadership excellence and team mentoring at the organisational level.</div>
+    </div></div>
   </div>
-</section>
+</div>
 
 <hr class="divider"/>
 
-<!-- CONTACT -->
+<!-- ── CONTACT ── -->
 <section id="contact">
   <div class="contact-inner fade-in">
     <div class="section-eyebrow" style="justify-content:center;">Let's Connect</div>
     <h2 class="contact-title">Open to New<br/><span>Opportunities</span></h2>
-    <p class="contact-sub">
-      18+ years shipping enterprise .NET systems on time and at scale. If you're looking for a lead engineer who can own architecture and delivery — I'm immediately available.
-    </p>
+    <p class="contact-sub">18+ years shipping enterprise .NET systems on time and at scale. If you're looking for a lead engineer who can own architecture and delivery — I'm immediately available.</p>
     <div class="contact-links">
       <a href="mailto:iyogeshgulve@gmail.com" class="contact-link primary">✉ iyogeshgulve@gmail.com</a>
       <a href="https://linkedin.com/in/yogeshgulve" target="_blank" class="contact-link secondary">LinkedIn →</a>
@@ -921,23 +847,194 @@
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ── FOOTER ── -->
 <footer>
   <span class="footer-name">Yogesh Pradeep Gulve</span>
   <span class="footer-note">Pune, Maharashtra · iyogeshgulve@gmail.com</span>
 </footer>
 
-<script>
-  // Fade-in on scroll
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+<!-- ── CHATBOT FAB ── -->
+<button id="chat-fab" onclick="toggleChat()" aria-label="Open chat">
+  <svg id="fab-chat-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 10H6v-2h12v2zm0-3H6V7h12v2z"/>
+  </svg>
+  <div class="fab-badge"></div>
+</button>
 
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+<!-- ── CHATBOT WINDOW ── -->
+<div id="chat-window">
+  <div class="chat-header">
+    <div class="chat-avatar">🤖</div>
+    <div class="chat-header-info">
+      <div class="chat-header-name">Ask about Yogesh</div>
+      <div class="chat-header-sub">Online · Instant answers</div>
+    </div>
+    <button class="chat-close" onclick="toggleChat()" aria-label="Close chat">✕</button>
+  </div>
+
+  <div class="chat-messages" id="chatMessages">
+    <div class="msg bot">
+      <div class="msg-avatar">🤖</div>
+      <div class="msg-bubble">Hi! 👋 I'm Yogesh's portfolio assistant. Ask me anything about his experience, skills, or availability!</div>
+    </div>
+  </div>
+
+  <div class="chat-suggestions" id="chatSuggestions">
+    <span class="suggestion-chip" onclick="sendSuggestion(this)">What's his experience?</span>
+    <span class="suggestion-chip" onclick="sendSuggestion(this)">Current role?</span>
+    <span class="suggestion-chip" onclick="sendSuggestion(this)">Tech stack?</span>
+    <span class="suggestion-chip" onclick="sendSuggestion(this)">Available to hire?</span>
+  </div>
+
+  <div class="chat-input-row">
+    <textarea id="chat-input" placeholder="Type a question…" rows="1"
+      onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+    <button id="chat-send" onclick="sendMessage()" aria-label="Send">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+/* ── MOBILE MENU ── */
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+function closeMobileMenu() {
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+}
+
+/* ── FADE-IN ON SCROLL ── */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+/* ── CHATBOT ── */
+let chatOpen = false;
+
+function toggleChat() {
+  chatOpen = !chatOpen;
+  document.getElementById('chat-window').classList.toggle('open', chatOpen);
+  const fab = document.getElementById('chat-fab');
+  // Swap icon between chat and X
+  document.getElementById('fab-chat-icon').innerHTML = chatOpen
+    ? '<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>'
+    : '<path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 10H6v-2h12v2zm0-3H6V7h12v2z"/>';
+  if (chatOpen) document.getElementById('chat-input').focus();
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 100) + 'px';
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+}
+
+function sendSuggestion(el) {
+  const text = el.textContent;
+  document.getElementById('chatSuggestions').style.display = 'none';
+  addMessage('user', text);
+  setTimeout(() => respond(text), 600);
+}
+
+function sendMessage() {
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  input.style.height = 'auto';
+  document.getElementById('chatSuggestions').style.display = 'none';
+  addMessage('user', text);
+  showTyping();
+  setTimeout(() => { removeTyping(); addMessage('bot', respond(text)); }, 900 + Math.random() * 500);
+}
+
+function addMessage(role, text) {
+  const msgs = document.getElementById('chatMessages');
+  const wrap = document.createElement('div');
+  wrap.className = 'msg ' + role;
+  if (role === 'bot') wrap.innerHTML = `<div class="msg-avatar">🤖</div><div class="msg-bubble">${text}</div>`;
+  else wrap.innerHTML = `<div class="msg-bubble">${text}</div>`;
+  msgs.appendChild(wrap);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function showTyping() {
+  const msgs = document.getElementById('chatMessages');
+  const wrap = document.createElement('div');
+  wrap.className = 'msg bot'; wrap.id = 'typing-row';
+  wrap.innerHTML = `<div class="msg-avatar">🤖</div><div class="msg-bubble"><div class="typing-indicator"><span></span><span></span><span></span></div></div>`;
+  msgs.appendChild(wrap);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+function removeTyping() {
+  const t = document.getElementById('typing-row');
+  if (t) t.remove();
+}
+
+/* ── KNOWLEDGE BASE ── */
+function respond(q) {
+  const lq = q.toLowerCase();
+
+  if (/experience|years|senior|background|career/.test(lq))
+    return "Yogesh has <strong>18+ years</strong> of full-stack .NET experience across Banking, Gaming, Supply Chain, Airlines, and EdTech. He's worked with Fortune 500 clients including HSBC, IndiGo Airlines, and Desire2Learn.";
+
+  if (/current|now|synechron|hsbc|role/.test(lq))
+    return "He's currently a <strong>Specialist Technology at Synechron</strong> (July 2024–Present), leading backend development for HSBC's Hedge Accounting System using .NET Core microservices, Angular, and AWS.";
+
+  if (/skill|tech|stack|language|framework|net|c#|angular|azure|aws/.test(lq))
+    return "Core stack: <strong>C# / .NET Core, Angular, Microservices, REST APIs</strong>. Cloud: Azure DevOps, AWS Lambda, S3, Azure Functions. AI tools: GitHub Copilot, Claude API, Semantic Kernel. Databases: SQL Server, PostgreSQL.";
+
+  if (/available|hire|join|start|freelance|open/.test(lq))
+    return "Yes! Yogesh is <strong>immediately available</strong>. You can reach him at <a href='mailto:iyogeshgulve@gmail.com' style='color:var(--cyan)'>iyogeshgulve@gmail.com</a> or call <a href='tel:+919860277127' style='color:var(--cyan)'>+91 98602 77127</a>.";
+
+  if (/award|recognition|achiev|certif|honour|honor/.test(lq))
+    return "Yogesh has earned: 🏆 Employee of the Month (Synechron, 2024), ⭐ EPAM Celebrates You Nominee (2023), 🎖 Customer Centricity Emerging Award (Zensar, 2017-18), and 2× Certificates of Excellence.";
+
+  if (/epam|desire2learn|havi|supply/.test(lq))
+    return "At <strong>EPAM Systems</strong> (2020–2024), Yogesh built the Desire2Learn LMS (50,000+ users, AWS Lambda) and HAVI Connect supply chain platform (10,000+ daily orders, ML-driven recommendations).";
+
+  if (/zensar|indigo|airline|gaming|nexus|playcheck/.test(lq))
+    return "At <strong>Zensar</strong> (2014–2020), he led IndiGo Airlines AIMS migration (50+ modules, zero defects), Playcheck casino system (100,000+ daily transactions), and NEXUS build optimizer (87.5% faster builds).";
+
+  if (/cloud|azure|aws|devops/.test(lq))
+    return "Yogesh has deep cloud experience across both <strong>Azure</strong> (DevOps, Functions, Blob Storage, Service Bus) and <strong>AWS</strong> (Lambda, S3, Step Functions, SNS/SQS). He's built CI/CD pipelines using Jenkins, TeamCity, and Octopus Deploy.";
+
+  if (/ai|llm|copilot|gpt|codex|semantic kernel|prompt/.test(lq))
+    return "He actively uses <strong>GitHub Copilot, Claude API, and OpenAI Codex</strong> in production workflows — accelerating development velocity by 25% at HSBC. He also builds with Microsoft Semantic Kernel for AI agent development.";
+
+  if (/contact|email|phone|reach|linkedin/.test(lq))
+    return "📧 <a href='mailto:iyogeshgulve@gmail.com' style='color:var(--cyan)'>iyogeshgulve@gmail.com</a><br/>📞 <a href='tel:+919860277127' style='color:var(--cyan)'>+91 98602 77127</a><br/>💼 <a href='https://linkedin.com/in/yogeshgulve' target='_blank' style='color:var(--cyan)'>linkedin.com/in/yogeshgulve</a>";
+
+  if (/location|pune|india|where/.test(lq))
+    return "Yogesh is based in <strong>Pune, Maharashtra, India</strong> and is open to on-site, hybrid, or remote opportunities.";
+
+  if (/education|degree|university|college|mba|master/.test(lq))
+    return "He holds a <strong>Master of Computer Management (MCM)</strong> from Naralikar Institute, Pune University (2006) and a <strong>B.Com</strong> from S.P. College, Pune University (2003).";
+
+  if (/banking|fintech|domain|sector/.test(lq))
+    return "His strongest domain is <strong>Banking & Fintech</strong> — currently on HSBC hedge accounting. Past domains include Supply Chain (HAVI), Aviation (IndiGo), Gaming (Zensar), and EdTech (Desire2Learn).";
+
+  if (/team|lead|mentor|manage/.test(lq))
+    return "Yes — Yogesh has led teams as <strong>Team Lead</strong> (Playcheck, 4 members) and has mentored junior developers across multiple engagements. He's also built development centres from scratch, like the IndiGo India dev centre.";
+
+  if (/hello|hi|hey|good|morning|afternoon|evening/.test(lq))
+    return "Hi there! 👋 I can answer questions about Yogesh's skills, experience, projects, awards, or how to get in touch. What would you like to know?";
+
+  if (/thank|thanks|great|nice|awesome/.test(lq))
+    return "You're welcome! Feel free to ask anything else about Yogesh, or reach out directly at <a href='mailto:iyogeshgulve@gmail.com' style='color:var(--cyan)'>iyogeshgulve@gmail.com</a> 🙌";
+
+  return "Great question! For detailed answers, feel free to reach Yogesh directly at <a href='mailto:iyogeshgulve@gmail.com' style='color:var(--cyan)'>iyogeshgulve@gmail.com</a> or browse the sections above. I can also answer questions about his <em>skills</em>, <em>experience</em>, <em>awards</em>, <em>tech stack</em>, or <em>availability</em>.";
+}
 </script>
 </body>
 </html>
